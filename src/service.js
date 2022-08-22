@@ -1,0 +1,22 @@
+import axios from 'axios';
+
+const API_KEY = '4167a3621086eb019767740c5538e3e4';
+
+//api.themoviedb.org/3/trending/all/day?api_key=<<api_key>>
+
+export async function getTrending() {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`
+  );
+  const { data } = response;
+
+  return data.results;
+}
+
+export async function getDetails(id) {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
+  );
+
+  return response.data;
+}
