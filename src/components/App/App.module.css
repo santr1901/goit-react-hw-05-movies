@@ -5,12 +5,16 @@
   box-shadow: 0px 3px 7px gray;
 }
 
-.navigation_item {
+.navigation_link {
   text-decoration: none;
   padding-right: 10px;
   color: black;
   font-weight: bold;
 }
-.navigation_item:active {
+
+.activeLink {
+  text-decoration: none;
+  padding-right: 10px;
+  font-weight: bold;
   color: red;
 }
