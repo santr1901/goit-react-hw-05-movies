@@ -1,13 +1,15 @@
 import { getDetails } from 'service';
 import { useState, useEffect } from 'react';
+import { useParams, Link, Outlet } from 'react-router-dom';
 import css from './MovieDetails.module.css';
 
-const MovieDetails = ({ id }) => {
+const MovieDetails = () => {
+  const { id } = useParams();
+
   const [data, setData] = useState({});
 
   useEffect(() => {
     getDetails(id).then(response => {
-      console.log(response);
       const allData = {
         id: response.id,
         title: response.title,
@@ -19,23 +21,42 @@ const MovieDetails = ({ id }) => {
       setData(allData);
     });
   }, [id]);
+
   const { title, score, poster, overview, genres } = data;
   return (
-    <div className={css.movie_details}>
-      <img
-        width="200px"
-        height="300px"
-        alt={`${title}`}
-        src={`${poster}`}
-      ></img>
-      <div>
-        <h2>{title}</h2>
-        <p>User score: {score}</p>
-        <h3>Overview</h3>
-        <p>{overview}</p>
-        <h4>Genres</h4>
-        <p>{genres} </p>
+    <div>
+      <Link to="/">
+        <button>GO BACK</button>
+      </Link>
+      <div className={css.movie_details}>
+        <img
+          width="200px"
+          height="300px"
+          alt={`${title}`}
+          src={`${poster}`}
+        ></img>
+        <div>
+          <h2>{title}</h2>
+          <p>User score: {score}</p>
+          <h3>Overview</h3>
+          <p>{overview}</p>
+          <h4>Genres</h4>
+          <p>{`${genres}`}</p>
+        </div>
       </div>
+      <div>
+        <h3>Additional information</h3>
+        <ul>
+          <li>
+            {' '}
+            <Link to="cast">Cast</Link>
+          </li>
+          <li>
+            <Link to="reviews">Reviews</Link>
+          </li>
+        </ul>
+      </div>
+      <Outlet />
     </div>
   );
 };

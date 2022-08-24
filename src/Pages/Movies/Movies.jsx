@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
 
 const Movies = () => {
   return (
@@ -7,7 +7,6 @@ const Movies = () => {
         <input placeholder="input movie name"></input>
         <button>Search</button>
       </form>
-      <Outlet />
     </div>
   );
 };
