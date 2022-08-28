@@ -1,11 +1,13 @@
 // import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import { searchMovie } from 'service';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
-  const [searchName, setSearchName] = useState('');
   const [searchedMovies, setSearchedMovies] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const searchName = searchParams.get('query') ?? '';
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -16,13 +18,12 @@ const Movies = () => {
       }));
       setSearchedMovies([...Results]);
     });
+    setSearchParams('');
   };
 
   const handleChangeName = event => {
-    setSearchName(event.currentTarget.value.toLowerCase());
+    setSearchParams({ query: event.currentTarget.value.toLowerCase() });
   };
-
-  console.log(searchedMovies);
 
   const addSearchedMovies = () => {
     return searchedMovies.map(movie => (

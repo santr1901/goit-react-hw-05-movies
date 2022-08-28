@@ -1,12 +1,13 @@
 import { getDetails } from 'service';
 import { useState, useEffect } from 'react';
-import { useParams, Link, Outlet } from 'react-router-dom';
+import { useParams, Link, Outlet, useNavigate } from 'react-router-dom';
 import css from './MovieDetails.module.css';
 
 const MovieDetails = () => {
   const { id } = useParams();
 
   const [data, setData] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     getDetails(id).then(response => {
@@ -26,7 +27,9 @@ const MovieDetails = () => {
   return (
     <div>
       <Link to="/">
-        <button>GO BACK</button>
+        <button className={css.back_btn} onClick={() => navigate(-1)}>
+          GO BACK
+        </button>
       </Link>
       <div className={css.movie_details}>
         <img
@@ -35,7 +38,7 @@ const MovieDetails = () => {
           alt={`${title}`}
           src={`${poster}`}
         ></img>
-        <div>
+        <div className={css.movie_info}>
           <h2>{title}</h2>
           <p>User score: {score}</p>
           <h3>Overview</h3>
@@ -45,6 +48,7 @@ const MovieDetails = () => {
         </div>
       </div>
       <div>
+        <hr />
         <h3>Additional information</h3>
         <ul>
           <li>
@@ -56,6 +60,7 @@ const MovieDetails = () => {
           </li>
         </ul>
       </div>
+      <hr />
       <Outlet />
     </div>
   );

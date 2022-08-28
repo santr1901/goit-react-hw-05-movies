@@ -1,3 +1,13 @@
 .movie_details {
   display: flex;
 }
+
+.back_btn {
+  margin-bottom: 10px;
+  margin-left: 5px;
+  width: 100px;
+}
+
+.movie_info {
+  margin-left: 10px;
+}

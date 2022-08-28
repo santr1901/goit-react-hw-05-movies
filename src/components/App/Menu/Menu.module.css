@@ -3,6 +3,7 @@
   padding: 15px;
   /* border-bottom: solid 0.1px; */
   box-shadow: 0px 3px 7px gray;
+  margin-bottom: 10px;
 }
 
 .navigation_link {
@@ -10,6 +11,10 @@
   padding-right: 10px;
   color: black;
   font-weight: bold;
+}
+
+.navigation_link:hover {
+  color: red;
 }
 
 .activeLink {
