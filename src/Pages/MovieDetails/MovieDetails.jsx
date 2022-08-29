@@ -5,7 +5,6 @@ import css from './MovieDetails.module.css';
 
 const MovieDetails = () => {
   const { id } = useParams();
-
   const [data, setData] = useState({});
   const navigate = useNavigate();
 
@@ -26,11 +25,10 @@ const MovieDetails = () => {
   const { title, score, poster, overview, genres } = data;
   return (
     <div>
-      <Link to="/">
-        <button className={css.back_btn} onClick={() => navigate(-1)}>
-          GO BACK
-        </button>
-      </Link>
+      <button className={css.back_btn} onClick={() => navigate(-1)}>
+        GO BACK
+      </button>
+
       <div className={css.movie_details}>
         <img
           width="200px"

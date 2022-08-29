@@ -1,31 +1,30 @@
 import { Routes, Route } from 'react-router-dom';
-import Movies from 'Pages/Movies/Movies';
-import Home from 'Pages/Home/Home';
-import Menu from './Menu/Menu';
-import Cast from 'Pages/MovieDetails/Cast/Cast';
-import Reviews from 'Pages/MovieDetails/Reviews/Reviews';
-// import { useState } from 'react';
+import { lazy, Suspense } from 'react';
 
-// import css from './App.module.css';
-import MovieDetails from 'Pages/MovieDetails/MovieDetails';
+const Movies = lazy(() => import('Pages/Movies/Movies'));
+const Home = lazy(() => import('Pages/Home/Home'));
+const Menu = lazy(() => import('./Menu/Menu'));
+const Cast = lazy(() => import('Pages/MovieDetails/Cast/Cast'));
+const Reviews = lazy(() => import('Pages/MovieDetails/Reviews/Reviews'));
+const MovieDetails = lazy(() => import('Pages/MovieDetails/MovieDetails'));
 
 const App = () => {
-  // const [id, setId] = useState();
-
   return (
     <div>
       <Menu />
+      <Suspense>
+        <Routes>
+          <Route path="/" exact="true" element={<Home />} />
+          <Route path="/Movies" exact="true" element={<Movies />} />
 
-      <Routes>
-        <Route path="/" exact="true" element={<Home />} />
-        <Route path="/Movies" exact="true" element={<Movies />} />
-        <Route path="/Movies/:id" element={<MovieDetails />}>
-          <Route path="cast" element={<Cast />}></Route>
-          <Route path="reviews" element={<Reviews />}></Route>
-        </Route>
+          <Route path="/Movies/:id" element={<MovieDetails />}>
+            <Route path="cast" element={<Cast />}></Route>
+            <Route path="reviews" element={<Reviews />}></Route>
+          </Route>
 
-        <Route path="*" element={<Home />}></Route>
-      </Routes>
+          <Route path="*" element={<Home />}></Route>
+        </Routes>
+      </Suspense>
     </div>
   );
 };
