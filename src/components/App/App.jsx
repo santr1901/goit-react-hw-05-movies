@@ -12,7 +12,7 @@ const App = () => {
   return (
     <div>
       <Menu />
-      <Suspense>
+      <Suspense fallback={<p>....Load page</p>}>
         <Routes>
           <Route path="/" exact="true" element={<Home />} />
           <Route path="/Movies" exact="true" element={<Movies />} />
