@@ -1,12 +1,16 @@
 import { getDetails } from 'service';
 import { useState, useEffect } from 'react';
-import { useParams, Link, Outlet, useNavigate } from 'react-router-dom';
+import { useParams, Outlet, useNavigate, useLocation } from 'react-router-dom';
+import MoviePage from 'components/MoviePage/MoviePage';
 import css from './MovieDetails.module.css';
 
 const MovieDetails = () => {
   const { id } = useParams();
   const [data, setData] = useState({});
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from || '/movies';
 
   useEffect(() => {
     getDetails(id).then(response => {
@@ -22,42 +26,12 @@ const MovieDetails = () => {
     });
   }, [id]);
 
-  const { title, score, poster, overview, genres } = data;
   return (
     <div>
-      <button className={css.back_btn} onClick={() => navigate(-1)}>
+      <button className={css.back_btn} onClick={() => navigate(from)}>
         GO BACK
       </button>
-
-      <div className={css.movie_details}>
-        <img
-          width="200px"
-          height="300px"
-          alt={`${title}`}
-          src={`${poster}`}
-        ></img>
-        <div className={css.movie_info}>
-          <h2>{title}</h2>
-          <p>User score: {score}</p>
-          <h3>Overview</h3>
-          <p>{overview}</p>
-          <h4>Genres</h4>
-          <p>{`${genres}`}</p>
-        </div>
-      </div>
-      <div>
-        <hr />
-        <h3>Additional information</h3>
-        <ul>
-          <li>
-            {' '}
-            <Link to="cast">Cast</Link>
-          </li>
-          <li>
-            <Link to="reviews">Reviews</Link>
-          </li>
-        </ul>
-      </div>
+      <MoviePage movieInfo={data} />
       <hr />
       <Outlet />
     </div>

@@ -1,0 +1,7 @@
+.movie_page {
+  display: flex;
+}
+
+.movie_info {
+  margin-left: 10px;
+}

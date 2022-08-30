@@ -18,8 +18,6 @@ const Reviews = () => {
     });
   }, [id]);
 
-  console.log(reviews);
-
   const showRewiews = () => {
     if (reviews.length === 0) {
       return <p>Sorry the are no reviews</p>;
